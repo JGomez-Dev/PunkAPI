@@ -1,0 +1,284 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > HomeScreenKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.jgomez.punkapi.ui.feature.home</a>
+</div>
+
+<h1>Coverage Summary for Class: HomeScreenKt (com.jgomez.punkapi.ui.feature.home)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HomeScreenKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">HomeScreenKt$DefaultPreview$1</td>
+  </tr>
+  <tr>
+    <td class="name">HomeScreenKt$HomeContent$1$1$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">HomeScreenKt$HomeContent$1$2$1$2$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">HomeScreenKt$HomeContent$2</td>
+  </tr>
+  <tr>
+    <td class="name">HomeScreenKt$HomeScreen$1</td>
+  </tr>
+  <tr>
+    <td class="name">HomeScreenKt$PortraitPreview$1</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/52)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.jgomez.punkapi.ui.feature.home
+&nbsp;
+&nbsp;import androidx.compose.foundation.layout.Column
+&nbsp;import androidx.compose.foundation.layout.fillMaxSize
+&nbsp;import androidx.compose.foundation.layout.fillMaxWidth
+&nbsp;import androidx.compose.foundation.layout.padding
+&nbsp;import androidx.compose.foundation.rememberScrollState
+&nbsp;import androidx.compose.foundation.text.ClickableText
+&nbsp;import androidx.compose.foundation.verticalScroll
+&nbsp;import androidx.compose.material3.CircularProgressIndicator
+&nbsp;import androidx.compose.material3.Text
+&nbsp;import androidx.compose.material3.TextField
+&nbsp;import androidx.compose.runtime.Composable
+&nbsp;import androidx.compose.runtime.getValue
+&nbsp;import androidx.compose.runtime.mutableStateOf
+&nbsp;import androidx.compose.runtime.remember
+&nbsp;import androidx.compose.runtime.setValue
+&nbsp;import androidx.compose.ui.Alignment
+&nbsp;import androidx.compose.ui.Modifier
+&nbsp;import androidx.compose.ui.text.buildAnnotatedString
+&nbsp;import androidx.compose.ui.text.input.TextFieldValue
+&nbsp;import androidx.compose.ui.tooling.preview.Preview
+&nbsp;import androidx.compose.ui.unit.dp
+&nbsp;import androidx.hilt.navigation.compose.hiltViewModel
+&nbsp;import androidx.lifecycle.compose.collectAsStateWithLifecycle
+&nbsp;import com.jgomez.punkapi.domain.model.BeerModel
+&nbsp;import com.jgomez.punkapi.ui.theme.MyApplicationTheme
+&nbsp;
+&nbsp;@Composable
+&nbsp;fun HomeScreen(
+<b class="nc">&nbsp;    viewModel: HomeViewModel = hiltViewModel(),</b>
+&nbsp;    goToDetail: (beer: Int?) -&gt; Unit
+<b class="nc">&nbsp;) {</b>
+<b class="nc">&nbsp;    val items by viewModel.state.collectAsStateWithLifecycle()</b>
+&nbsp;
+<b class="nc">&nbsp;    when (items) {</b>
+<b class="nc">&nbsp;        is HomeUiState.Error -&gt; {</b>
+<b class="nc">&nbsp;            Text(text = &quot;Error&quot;)</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        is HomeUiState.Loading -&gt; {</b>
+<b class="nc">&nbsp;            CircularProgressIndicator()</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        is HomeUiState.Success -&gt; {</b>
+<b class="nc">&nbsp;            HomeContent(</b>
+<b class="nc">&nbsp;                items = (items as HomeUiState.Success).data,</b>
+<b class="nc">&nbsp;                goToDetail = goToDetail,</b>
+&nbsp;            )
+&nbsp;        }
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;}</b>
+&nbsp;
+&nbsp;@Composable
+&nbsp;private fun HomeContent(
+&nbsp;    items: List&lt;BeerModel&gt;,
+&nbsp;    goToDetail: (beer: Int?) -&gt; Unit
+<b class="nc">&nbsp;) {</b>
+<b class="nc">&nbsp;    var textState by remember { mutableStateOf(TextFieldValue(text = &quot;&quot;)) }</b>
+&nbsp;
+<b class="nc">&nbsp;    val filteredList = if (textState.text.isEmpty()) {</b>
+<b class="nc">&nbsp;        items</b>
+&nbsp;    } else {
+<b class="nc">&nbsp;        items.filter { data -&gt;</b>
+<b class="nc">&nbsp;            data.name!!.startsWith(textState.text, ignoreCase = true)</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    Column(</b>
+<b class="nc">&nbsp;        modifier = Modifier</b>
+<b class="nc">&nbsp;            .fillMaxSize()</b>
+<b class="nc">&nbsp;            .padding(start = 16.dp, end = 16.dp, top = 8.dp),</b>
+&nbsp;    ) {
+<b class="nc">&nbsp;        TextField(</b>
+<b class="nc">&nbsp;            value = textState, onValueChange = {</b>
+<b class="nc">&nbsp;                textState = it</b>
+&nbsp;            },
+<b class="nc">&nbsp;            modifier = Modifier.fillMaxWidth()</b>
+&nbsp;        )
+<b class="nc">&nbsp;        Column(</b>
+<b class="nc">&nbsp;            Modifier</b>
+<b class="nc">&nbsp;                .fillMaxWidth()</b>
+<b class="nc">&nbsp;                .verticalScroll(rememberScrollState()),</b>
+<b class="nc">&nbsp;            horizontalAlignment = Alignment.Start</b>
+&nbsp;        ) {
+<b class="nc">&nbsp;            filteredList.forEach { item -&gt;</b>
+<b class="nc">&nbsp;                ClickableText(</b>
+<b class="nc">&nbsp;                    modifier = Modifier</b>
+<b class="nc">&nbsp;                        .padding(16.dp)</b>
+<b class="nc">&nbsp;                        .fillMaxWidth(),</b>
+<b class="nc">&nbsp;                    text = buildAnnotatedString {</b>
+<b class="nc">&nbsp;                        append(item.name)</b>
+<b class="nc">&nbsp;                    },</b>
+<b class="nc">&nbsp;                    onClick = {</b>
+<b class="nc">&nbsp;                        goToDetail(item.id)</b>
+&nbsp;                    }
+&nbsp;                )
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+&nbsp;
+&nbsp;// Previews
+&nbsp;@Preview(showBackground = true)
+&nbsp;@Composable
+<b class="nc">&nbsp;private fun DefaultPreview() {</b>
+<b class="nc">&nbsp;    MyApplicationTheme {</b>
+&nbsp;        HomeContent(listOf(
+&nbsp;            BeerModel(id = 1, name = &quot;Aguila&quot;, description = &quot;Cerveza muy buena&quot;, grades = 7.3, image = &quot;&quot;),
+&nbsp;            BeerModel(id = 1, name = &quot;Mahou&quot;, description = &quot;Cerveza menos buena&quot;, grades = 4.2, image = &quot;&quot;)
+&nbsp;        ), goToDetail = {})
+&nbsp;    }
+<b class="nc">&nbsp;}</b>
+&nbsp;
+&nbsp;@Preview(showBackground = true, widthDp = 480)
+&nbsp;@Composable
+<b class="nc">&nbsp;private fun PortraitPreview() {</b>
+<b class="nc">&nbsp;    MyApplicationTheme {</b>
+&nbsp;        HomeContent(listOf(
+&nbsp;            BeerModel(id = 1, name = &quot;Aguila&quot;, description = &quot;Cerveza muy buena&quot;, grades = 7.4, image = &quot;&quot;),
+&nbsp;            BeerModel(id = 1, name = &quot;Mahou&quot;, description = &quot;Cerveza menos buena&quot;, grades = 4.1, image = &quot;&quot;)
+&nbsp;        ), goToDetail = {})
+&nbsp;    }
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-01-04 00:10</div>
+</div>
+</body>
+</html>

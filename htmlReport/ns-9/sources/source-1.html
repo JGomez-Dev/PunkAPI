@@ -1,0 +1,156 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > BeerRepositoryImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.jgomez.punkapi.data.repository</a>
+</div>
+
+<h1>Coverage Summary for Class: BeerRepositoryImpl (com.jgomez.punkapi.data.repository)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeerRepositoryImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BeerRepositoryImpl$getBeerById$1</td>
+  </tr>
+  <tr>
+    <td class="name">BeerRepositoryImpl$getBeers$1</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.jgomez.punkapi.data.repository
+&nbsp;
+&nbsp;import com.jgomez.punkapi.core.utils.Either
+&nbsp;import com.jgomez.punkapi.core.utils.eitherFailure
+&nbsp;import com.jgomez.punkapi.core.utils.eitherSuccess
+&nbsp;import com.jgomez.punkapi.core.utils.isFailure
+&nbsp;import com.jgomez.punkapi.core.utils.onFailure
+&nbsp;import com.jgomez.punkapi.core.utils.onSuccess
+&nbsp;import com.jgomez.punkapi.data.datasource.remote.BeerApiService
+&nbsp;import com.jgomez.punkapi.data.mapper.toDomain
+&nbsp;import com.jgomez.punkapi.data.mapper.toDomainModel
+&nbsp;import com.jgomez.punkapi.domain.model.BeerModel
+&nbsp;import com.jgomez.punkapi.domain.model.GenericError
+&nbsp;import com.jgomez.punkapi.domain.repository.BeerRepository
+&nbsp;
+<b class="nc">&nbsp;class BeerRepositoryImpl(private val beerApiService: BeerApiService) : BeerRepository {</b>
+<b class="nc">&nbsp;    override suspend fun getBeers(): Either&lt;List&lt;BeerModel&gt;, GenericError&gt; {</b>
+<b class="nc">&nbsp;        val beerList = beerApiService.getBeers().toDomainModel { beerDTOList -&gt;</b>
+<b class="nc">&nbsp;            beerDTOList.map { beerDTO -&gt;</b>
+<b class="nc">&nbsp;                beerDTO.toDomain()</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (beerList.isSuccessful) {</b>
+<b class="nc">&nbsp;            beerList.data?.let {</b>
+<b class="nc">&nbsp;                return eitherSuccess(beerList.data!!)</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return eitherFailure(GenericError(&quot;Ha ocurrido un error al recuperar los datos&quot;, beerList.code ?: 0))</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    override suspend fun getBeerById(id: Int): Either&lt;BeerModel, GenericError&gt; {</b>
+<b class="nc">&nbsp;        val beerList = getBeers()</b>
+<b class="nc">&nbsp;        beerList.onSuccess { beerModel -&gt;</b>
+<b class="nc">&nbsp;            beerModel.firstOrNull { it.id == id }?.let { beer -&gt;</b>
+<b class="nc">&nbsp;                return eitherSuccess(beer)</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return eitherFailure(GenericError(&quot;Ha ocurrido un error al recuperar eld etalle&quot;,0))</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-01-04 00:10</div>
+</div>
+</body>
+</html>

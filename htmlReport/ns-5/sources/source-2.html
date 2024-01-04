@@ -1,0 +1,117 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > DatabaseModule_ProvideHomeDaoFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.jgomez.punkapi.data.datasource.local.di</a>
+</div>
+
+<h1>Coverage Summary for Class: DatabaseModule_ProvideHomeDaoFactory (com.jgomez.punkapi.data.datasource.local.di)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">DatabaseModule_ProvideHomeDaoFactory</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.jgomez.punkapi.data.datasource.local.di;
+&nbsp;
+&nbsp;import com.jgomez.punkapi.data.datasource.local.database.AppDatabase;
+&nbsp;import com.jgomez.punkapi.data.datasource.local.database.HomeDao;
+&nbsp;import dagger.internal.DaggerGenerated;
+&nbsp;import dagger.internal.Factory;
+&nbsp;import dagger.internal.Preconditions;
+&nbsp;import dagger.internal.QualifierMetadata;
+&nbsp;import dagger.internal.ScopeMetadata;
+&nbsp;import javax.annotation.processing.Generated;
+&nbsp;import javax.inject.Provider;
+&nbsp;
+&nbsp;@ScopeMetadata
+&nbsp;@QualifierMetadata
+&nbsp;@DaggerGenerated
+&nbsp;@Generated(
+&nbsp;    value = &quot;dagger.internal.codegen.ComponentProcessor&quot;,
+&nbsp;    comments = &quot;https://dagger.dev&quot;
+&nbsp;)
+&nbsp;@SuppressWarnings({
+&nbsp;    &quot;unchecked&quot;,
+&nbsp;    &quot;rawtypes&quot;,
+&nbsp;    &quot;KotlinInternal&quot;,
+&nbsp;    &quot;KotlinInternalInJava&quot;
+&nbsp;})
+&nbsp;public final class DatabaseModule_ProvideHomeDaoFactory implements Factory&lt;HomeDao&gt; {
+&nbsp;  private final DatabaseModule module;
+&nbsp;
+&nbsp;  private final Provider&lt;AppDatabase&gt; appDatabaseProvider;
+&nbsp;
+&nbsp;  public DatabaseModule_ProvideHomeDaoFactory(DatabaseModule module,
+&nbsp;      Provider&lt;AppDatabase&gt; appDatabaseProvider) {
+&nbsp;    this.module = module;
+&nbsp;    this.appDatabaseProvider = appDatabaseProvider;
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public HomeDao get() {
+&nbsp;    return provideHomeDao(module, appDatabaseProvider.get());
+&nbsp;  }
+&nbsp;
+&nbsp;  public static DatabaseModule_ProvideHomeDaoFactory create(DatabaseModule module,
+&nbsp;      Provider&lt;AppDatabase&gt; appDatabaseProvider) {
+&nbsp;    return new DatabaseModule_ProvideHomeDaoFactory(module, appDatabaseProvider);
+&nbsp;  }
+&nbsp;
+&nbsp;  public static HomeDao provideHomeDao(DatabaseModule instance, AppDatabase appDatabase) {
+&nbsp;    return Preconditions.checkNotNullFromProvides(instance.provideHomeDao(appDatabase));
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-01-04 00:10</div>
+</div>
+</body>
+</html>
