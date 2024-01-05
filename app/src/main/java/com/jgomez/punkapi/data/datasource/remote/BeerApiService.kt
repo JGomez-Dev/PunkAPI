@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface BeerApiService {
 
     @GET("beers")
-    fun getBeers() : Response<List<BeerDTO>>
+    suspend fun getBeers() : Response<List<BeerDTO>>
 }

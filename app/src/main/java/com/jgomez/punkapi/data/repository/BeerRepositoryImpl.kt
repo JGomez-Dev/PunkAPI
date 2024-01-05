@@ -12,7 +12,7 @@ import com.jgomez.punkapi.domain.model.GenericError
 import com.jgomez.punkapi.domain.repository.BeerRepository
 
 class BeerRepositoryImpl(private val beerApiService: BeerApiService) : BeerRepository {
-    override fun getBeers(): Either<List<BeerModel>, GenericError> {
+    override suspend fun getBeers(): Either<List<BeerModel>, GenericError> {
         val beerList = beerApiService.getBeers()
             .toDomainModel { beerDTOList ->
                 beerDTOList.map { beerDTO ->
@@ -27,7 +27,7 @@ class BeerRepositoryImpl(private val beerApiService: BeerApiService) : BeerRepos
         return eitherFailure(GenericError("Ha ocurrido un error al recuperar los datos", beerList.code ?: 0))
     }
 
-    override fun getBeerById(id: Int): Either<BeerModel, GenericError> {
+    override suspend fun getBeerById(id: Int): Either<BeerModel, GenericError> {
         val beerList = getBeers()
         beerList.onSuccess { beerModel ->
             beerModel.firstOrNull { it.id == id }?.let { beer ->
