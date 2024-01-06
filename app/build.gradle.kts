@@ -127,4 +127,7 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation (libs.turbine)
     implementation(kotlin("reflect"))
+
+    implementation (libs.compose)
+
 }
